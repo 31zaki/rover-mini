@@ -1,7 +1,7 @@
 # Rover mini Project
 
 ## Project Overview
-This my own small Mars Rover is built using only the chassis of the PiCar-X. For detailed information about the PiCar-X chassis, you can refer to the [official documentation](https://docs.sunfounder.com/projects/picar-x-v20/en/latest/index.html). Note that in this project, the included Robot-HAT is not used. Instead, a custom PCB has been designed for the necessary components and connections. Additionally, custom parts for mounting the PCB were designed using Fusion360.
+This is my own small Mars Rover project. The rover is built using only the chassis of the PiCar-X. For detailed information about the PiCar-X chassis, you can refer to the [official documentation](https://docs.sunfounder.com/projects/picar-x-v20/en/latest/index.html). Note that in this project, the included Robot-HAT is not used. Instead, a custom PCB has been designed for the necessary components and connections. Additionally, custom parts for mounting the PCB were designed using Fusion360.
 
 This project, named "rover-mini," is inspired by my favorite British car, the [Rover Mini](https://en.wikipedia.org/wiki/Mini). The name reflects my respect for this iconic vehicle, known for its compact design and efficient performance, traits that I aim to emulate in this mini robotic rover project.
 
