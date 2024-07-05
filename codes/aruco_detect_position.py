@@ -1,12 +1,12 @@
-from flask import Flask, Response
+from flask import Flask, jsonify
 import cv2
 import threading
 import cv2.aruco as aruco
 
 app = Flask(__name__)
 
-# Global variable to hold the frame and a lock for thread safety
-output_frame = None
+# Global variable to hold the positions and a lock for thread safety
+output_positions = None
 lock = threading.Lock()
 
 def detect_aruco_tags(frame):
@@ -14,13 +14,13 @@ def detect_aruco_tags(frame):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # Load the ARUCO dictionary
-    aruco_dict = aruco.Dictionary_get(aruco.DICT_6X6_250)
-    parameters = aruco.DetectorParameters_create()
+    aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_6X6_250)
+    parameters = aruco.DetectorParameters()
 
     # Detect ARUCO markers in the grayscale image
     corners, ids, rejected = aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
 
-    # Draw rectangles around detected markers and extract positions
+    # Extract positions of detected markers
     positions = []
     if ids is not None:
         for corner in corners:
@@ -28,13 +28,11 @@ def detect_aruco_tags(frame):
             x = int((c[0][0] + c[2][0]) / 2)
             y = int((c[0][1] + c[2][1]) / 2)
             positions.append((x, y))
-            # Draw rectangle around the marker
-            cv2.polylines(frame, [corner.astype(int)], True, (0, 255, 0), 2)
 
-    return positions, frame
+    return positions
 
 def capture_frames():
-    global output_frame, lock
+    global output_positions, lock
 
     camera = cv2.VideoCapture(0)
 
@@ -53,8 +51,8 @@ def capture_frames():
             print("Error: Could not read frame.")
             break
         else:
-            # Detect ARUCO tags in the frame and draw rectangles
-            positions, annotated_frame = detect_aruco_tags(frame)
+            # Detect ARUCO tags in the frame
+            positions = detect_aruco_tags(frame)
 
             # Print the positions of the detected ARUCO tags
             if positions:
@@ -63,36 +61,13 @@ def capture_frames():
                 print("No ARUCO tags detected")
 
             with lock:
-                output_frame = annotated_frame.copy()
-
-def generate_frames():
-    global output_frame, lock
-
-    while True:
-        with lock:
-            if output_frame is None:
-                continue
-
-            # Debug: Output the shape of the frame being processed
-            print(f"Processing frame of shape: {output_frame.shape}")
-
-            ret, buffer = cv2.imencode('.jpg', output_frame, [int(cv2.IMWRITE_JPEG_QUALITY), 70])
-            if not ret:
-                print("Error: Could not encode frame.")
-                continue
-            frame = buffer.tobytes()
-
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+                output_positions = positions
 
 @app.route('/')
 def index():
-    return "Video feed is running. Go to /video_feed to view the feed."
-
-@app.route('/video_feed')
-def video_feed():
-    return Response(generate_frames(),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
+    with lock:
+        positions = output_positions if output_positions else []
+    return jsonify(positions)
 
 if __name__ == "__main__":
     # Start a thread to capture frames from the camera
@@ -100,5 +75,5 @@ if __name__ == "__main__":
     capture_thread.daemon = True
     capture_thread.start()
 
-    # Start the Flask application
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    # Start the Flask application on port 5001
+    app.run(host='0.0.0.0', port=5001, debug=True)
