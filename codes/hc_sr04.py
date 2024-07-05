@@ -5,8 +5,8 @@ import time
 GPIO.setmode(GPIO.BCM)
 
 # Set GPIO pins for HC-SR04
-GPIO_TRIGGER = 23
-GPIO_ECHO = 24
+GPIO_TRIGGER = 17
+GPIO_ECHO = 4
 
 # Set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
@@ -44,7 +44,7 @@ if __name__ == '__main__':
         while True:
             dist = distance()
             print(f"Measured Distance = {dist:.1f} cm")
-            time.sleep(1)
+            time.sleep(0.1)
 
     except KeyboardInterrupt:
         print("Measurement stopped by User")
