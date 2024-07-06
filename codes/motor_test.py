@@ -34,14 +34,14 @@ pwm2.start(0)
 try:
   while True:
     # move motor 1 forward
-    GPIO.output(motor1_in1, GPIO.HIGH)
-    GPIO.output(motor1_in2, GPIO.LOW)
+    GPIO.output(motor1_in1, GPIO.LOW)
+    GPIO.output(motor1_in2, GPIO.HIGH)
     pwm1.ChangeDutyCycle(75) # you can adjust spped (0-100)
     print("move motor 1 forward")
 
     # move motor 2 forward
-    GPIO.output(motor2_in3, GPIO.HIGH)
-    GPIO.output(motor2_in4, GPIO.LOW)
+    GPIO.output(motor2_in3, GPIO.LOW)
+    GPIO.output(motor2_in4, GPIO.HIGH)
     pwm2.ChangeDutyCycle(75) # you can adjust speed (0-100)
     print("move motor 2 forward")
 
@@ -53,14 +53,14 @@ try:
     time.sleep(2)
 
     # move motor 1 backward
-    GPIO.output(motor1_in1, GPIO.LOW)
-    GPIO.output(motor1_in2, GPIO.HIGH)
+    GPIO.output(motor1_in1, GPIO.HIGH)
+    GPIO.output(motor1_in2, GPIO.LOW)
     pwm1.ChangeDutyCycle(75)
     print("move motor 1 backward")
 
     # move motor 2 backward
-    GPIO.output(motor2_in3, GPIO.LOW)
-    GPIO.output(motor2_in4, GPIO.HIGH)
+    GPIO.output(motor2_in3, GPIO.HIGH)
+    GPIO.output(motor2_in4, GPIO.LOW)
     pwm2.ChangeDutyCycle(75)
     print("move motor 1 backward")
 
