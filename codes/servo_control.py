@@ -1,37 +1,28 @@
 import RPi.GPIO as GPIO
 import time
 
-# Set GPIO numbering mode
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
+class ServoController:
+    def __init__(self, pin, frequency=50):
+        self.pin = pin
+        self.frequency = frequency
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
+        GPIO.setup(self.pin, GPIO.OUT)
+        self.servo = GPIO.PWM(self.pin, self.frequency)
+        self.servo.start(0)
 
-# Set pin 5 as an output, and set servo1 as PWM pin
-GPIO.setup(5, GPIO.OUT)
-servo1 = GPIO.PWM(5, 50)  # GPIO 5 for PWM with 50Hz
+    def set_angle(self, angle):
+        # Ensure angle is within the specified range
+        if angle < 60:
+            angle = 60
+        elif angle > 120:
+            angle = 120
 
-# Start PWM running, with value of 0 (pulse off)
-servo1.start(0)
+        # Calculate duty cycle for the specified angle
+        duty = angle / 18 + 2
+        self.servo.ChangeDutyCycle(duty)
+        time.sleep(0.5)  # Allow time for the servo to move and stabilize
 
-def set_angle(angle):
-    # Ensure angle is within the specified range
-    if angle < 60:
-        angle = 60
-    elif angle > 120:
-        angle = 120
-
-    # Calculate duty cycle for the specified angle
-    duty = angle / 18 + 2
-    servo1.ChangeDutyCycle(duty)
-
-try:
-    while True:
-        angle = float(input("Enter angle between 60 and 120: "))
-        if 60 <= angle <= 120:
-            set_angle(angle)
-            print(f"Servo set to {angle} degrees")
-        else:
-            print("Invalid angle. Please enter a value between 60 and 120.")
-
-except KeyboardInterrupt:
-    servo1.stop()
-    GPIO.cleanup()
+    def cleanup(self):
+        self.servo.stop()
+        GPIO.cleanup()
