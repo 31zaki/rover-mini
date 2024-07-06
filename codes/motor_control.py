@@ -25,18 +25,18 @@ class MotorControl:
         self.pwm2.ChangeDutyCycle(0)
 
     def move_forward(self, speed=75):
-        GPIO.output(self.motor1_in1, GPIO.HIGH)
-        GPIO.output(self.motor1_in2, GPIO.LOW)
-        GPIO.output(self.motor2_in3, GPIO.HIGH)
-        GPIO.output(self.motor2_in4, GPIO.LOW)
-        self.pwm1.ChangeDutyCycle(speed)
-        self.pwm2.ChangeDutyCycle(speed)
-
-    def move_backward(self, speed=75):
         GPIO.output(self.motor1_in1, GPIO.LOW)
         GPIO.output(self.motor1_in2, GPIO.HIGH)
         GPIO.output(self.motor2_in3, GPIO.LOW)
         GPIO.output(self.motor2_in4, GPIO.HIGH)
+        self.pwm1.ChangeDutyCycle(speed)
+        self.pwm2.ChangeDutyCycle(speed)
+
+    def move_backward(self, speed=75):
+        GPIO.output(self.motor1_in1, GPIO.HIGH)
+        GPIO.output(self.motor1_in2, GPIO.LOW)
+        GPIO.output(self.motor2_in3, GPIO.HIGH)
+        GPIO.output(self.motor2_in4, GPIO.LOW)
         self.pwm1.ChangeDutyCycle(speed)
         self.pwm2.ChangeDutyCycle(speed)
 
