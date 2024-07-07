@@ -2,24 +2,24 @@ EAGLE AutoRouter Statistics:
 
 Job           : C:/Users/zakis/OneDrive/Documents/GitHub/rover-mini/EAGLE/project/main_board.brd
 
-Start at      : 00:08:08 (21/06/2024)
-End at        : 00:08:32 (21/06/2024)
-Elapsed time  : 00:00:23
+Start at      : 08:44:46 (08/07/2024)
+End at        : 08:45:28 (08/07/2024)
+Elapsed time  : 00:00:22
 
-Signals       :    24   RoutingGrid: 6.43701 mil  Layers: 2
-Connections   :    51   predefined:  0 ( 0 Vias )
+Signals       :    26   RoutingGrid: 4.92126 mil  Layers: 2
+Connections   :    55   predefined:  0 ( 0 Vias )
 
-Router memory :   964296
+Router memory :   2064000
 
-Passname          : TopRouter     Route Optimize1 Optimize2 Optimize3 Optimize4 Optimize5 Optimize6 Optimize7 Optimize8 Optimize9Optimize10Optimize11Optimize12
+Passname          :    Busses     Route Optimize1 Optimize2 Optimize3 Optimize4
 
-Time per pass     :  00:00:04  00:00:01  00:00:02  00:00:02  00:00:01  00:00:02  00:00:01  00:00:02  00:00:01  00:00:01  00:00:02  00:00:01  00:00:01  00:00:02
-Number of Ripups  :         0         3         0         0         0         0         0         0         0         0         0         0         0         0
-max. Level        :         0         1         0         0         0         0         0         0         0         0         0         0         0         0
-max. Total        :         0         9         0         0         0         0         0         0         0         0         0         0         0         0
+Time per pass     :  00:00:00  00:00:07  00:00:04  00:00:04  00:00:04  00:00:03
+Number of Ripups  :         0        10         0         0         0         0
+max. Level        :         0         2         0         0         0         0
+max. Total        :         0         3         0         0         0         0
 
-Routed            :        32        51        50        51        51        51        51        51        51        51        51        51        51        51
-Vias              :         0        11        40        27        25        25        25        25        25        19        19        19        19        19
-Resolution        :    62.7 %   100.0 %    98.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
+Routed            :         1        55        55        55        55        55
+Vias              :         0       105        48        32        29        27
+Resolution        :     1.8 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
 
 Final             : 100.0% finished
