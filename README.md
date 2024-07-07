@@ -1,9 +1,10 @@
-# Rover mini Project
+# Rover Mini Project
+
+This project, named "rover-mini," is inspired by my favorite British car, the [Rover Mini](https://en.wikipedia.org/wiki/Mini) ([additional info](http://www.classicandsportscar.com/features/buyers-guide-rover-mini)). The name reflects my respect for this iconic vehicle, known for its compact design and efficient performance, traits that I aim to emulate in this mini robotic rover project.
 
 ## Project Overview
-This is my own small Mars Rover project. The rover is built using only the chassis of the PiCar-X. For detailed information about the PiCar-X chassis, you can refer to the [official documentation](https://docs.sunfounder.com/projects/picar-x-v20/en/latest/index.html). Note that in this project, the included Robot-HAT is not used. Instead, a custom PCB has been designed for the necessary components and connections. Additionally, custom parts for mounting the PCB were designed using Fusion360.
 
-This project, named "rover-mini," is inspired by my favorite British car, the [Rover Mini](https://en.wikipedia.org/wiki/Mini). The name reflects my respect for this iconic vehicle, known for its compact design and efficient performance, traits that I aim to emulate in this mini robotic rover project.
+The Mini Rover is built using only the chassis of the PiCar-X. For detailed information about the PiCar-X chassis, you can refer to the [official documentation](https://docs.sunfounder.com/projects/picar-x-v20/en/latest/index.html). Note that in this project, the included Robot-HAT is not used. Instead, a custom PCB has been designed for the necessary components and connections. Additionally, custom parts for mounting the PCB were designed using Fusion360.
 
 ## Components
 
@@ -30,16 +31,17 @@ Custom EAGLE libraries have been created for the components used in this project
 
 ## Development Environment
 
-**Programming Language:** Python
+- **Programming Language:** Python
 - **IDE:** Visual Studio Code (VSCode)
 - **Connection:** SSH from VSCode to Raspberry Pi
 
 ## Wiring Information
 
 ### Raspberry Pi 4 (40-pin header) Connections
-- **3.3V (Pin 1)** --------------- VCC (BNO055)
+
+- **3.3V (Pin 1)** --------------- VCC (BNO055, nRF24L01)
 - **5V (Pin 2)** --------------- VCC (HC-SR04)
-- **GND (Pin 6)** --------------- GND (L298N)
+- **GND (Pin 6)** --------------- GND (L298N, nRF24L01)
 - **GND (Pin 9)** --------------- GND (BNO055)
 - **GND (Pin 14)** -------------- GND (Servo Motors)
 - **GPIO 2 (Pin 3)** ------------- SDA (BNO055)
@@ -52,16 +54,21 @@ Custom EAGLE libraries have been created for the components used in this project
 - **GPIO 25 (Pin 22)** ----------- ENB (L298N)
 - **GPIO 27 (Pin 13)** ----------- IN3 (L298N)
 - **GPIO 22 (Pin 15)** ----------- IN4 (L298N)
+- **GPIO 19 (Pin 35)** ----------- CE (nRF24L01)
+- **GPIO 8 (Pin 24)** ------------ CSN (nRF24L01)
+- **GPIO 11 (Pin 23)** ----------- SCK (nRF24L01)
+- **GPIO 10 (Pin 19)** ----------- MOSI (nRF24L01)
+- **GPIO 9 (Pin 21)** ------------ MISO (nRF24L01)
 - **GPIO 5 (Pin 29)** ------------ Servo 1 Control
 - **GPIO 6 (Pin 31)** ------------ Servo 2 Control
 - **GPIO 13 (Pin 33)** ----------- Servo 3 Control
 
 ## Goals
 
-- **Programming Practice:** Enhance programming skills, particularly in Python.
-- **Electronics Practice:** Gain hands-on experience with electronics and hardware integration.
-- **Autonomous Navigation:** Develop a rover that can navigate autonomously using GPS coordinates.
-- **ARUCO Tag Recognition:** Implement ARUCO tag recognition for advanced navigation and positioning.
+1. **Programming Practice:** Enhance programming skills, particularly in Python.
+2. **Electronics Practice:** Gain hands-on experience with electronics and hardware integration.
+3. **Autonomous Navigation:** Develop a rover that can navigate autonomously using GPS coordinates.
+4. **ARUCO Tag Recognition:** Implement ARUCO tag recognition for advanced navigation and positioning.
 
 ## Getting Started
 
@@ -74,14 +81,16 @@ Ensure you have the following installed on your Raspberry Pi:
 
 ### Installation
 
-Clone this repository to your Raspberry Pi:
+1. Clone this repository to your Raspberry Pi:
+
     ```bash
     git clone https://github.com/31zaki/mini-rover.git
     cd mini-rover
     ```
-Install the necessary Python packages:
 
-Connect to your Raspberry Pi from VSCode via SSH to start development.
+2. Install the necessary Python packages:
+
+3. Connect to your Raspberry Pi from VSCode via SSH to start development.
 
 ## Usage
 
