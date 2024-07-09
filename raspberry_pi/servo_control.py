@@ -13,10 +13,10 @@ class ServoController:
 
     def set_angle(self, angle):
         # Ensure angle is within the specified range
-        if angle < 60:
-            angle = 60
-        elif angle > 120:
-            angle = 120
+        if angle < 55:
+            angle = 55
+        elif angle > 115:
+            angle = 115
 
         # Calculate duty cycle for the specified angle
         duty = angle / 18 + 2
