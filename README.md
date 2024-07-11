@@ -59,9 +59,7 @@ Custom EAGLE libraries have been created for the components used in this project
 - **GPIO 11 (Pin 23)** ----------- SCK (nRF24L01)
 - **GPIO 10 (Pin 19)** ----------- MOSI (nRF24L01)
 - **GPIO 9 (Pin 21)** ------------ MISO (nRF24L01)
-- **GPIO 5 (Pin 29)** ------------ Servo 1 Control
-- **GPIO 6 (Pin 31)** ------------ Servo 2 Control
-- **GPIO 13 (Pin 33)** ----------- Servo 3 Control
+- **GPIO 12 (Pin 32)** ------------ Servo 1 Control
 
 ## Goals
 

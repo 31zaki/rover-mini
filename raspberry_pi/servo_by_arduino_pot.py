@@ -1,43 +1,38 @@
 import sys
 sys.path.append('/home/zach/.local/lib/python3.12/site-packages')
 
+import RPi.GPIO as GPIO
 import pigpio
 import time
 import spidev
 from lib_nrf24 import NRF24
-from simple_pid import PID
-from collections import deque
+from threading import Thread, Event
 
 class ServoController:
-    def __init__(self, servo_pin, frequency=50):
+    def __init__(self, pi, servo_pin, frequency=50):
+        self.pi = pi
         self.servo_pin = servo_pin
         self.frequency = frequency
-
-        self.pi = pigpio.pi()
-
-        self.current_angle = 90  # 初期角度を90度に設定
+        self.current_angle = 95  # 初期角度を95度に設定
         self.set_angle(self.current_angle)
 
     def set_angle(self, angle):
         # Ensure angle is within the specified range
-        if angle < 70:
-            angle = 70
-        elif angle > 110:
-            angle = 110
-
+        angle = max(70, min(angle, 120))
         self.current_angle = angle
         # Calculate pulse width for the specified angle
         pulse_width = int((500 + (angle * 11.11)))  # Convert angle to pulse width in microseconds
         self.pi.set_servo_pulsewidth(self.servo_pin, pulse_width)
-        time.sleep(0.01)  # Allow time for the servo to move and stabilize
 
     def cleanup(self):
         self.pi.set_servo_pulsewidth(self.servo_pin, 0)  # Stop sending pulses to the servo
-        self.pi.stop()
 
-# Initialize the radio
+# Initialize GPIO and the radio
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
 pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1]]
-radio = NRF24(pigpio.pi(), spidev.SpiDev())
+radio = NRF24(GPIO, spidev.SpiDev())
 radio.begin(0, 19)
 radio.setPayloadSize(1)  # Payload size is now 1 byte
 radio.setChannel(0x77)
@@ -53,44 +48,46 @@ radio.printDetails()
 radio.startListening()
 
 # Initialize the servo controller
+pi = pigpio.pi()
 servo_pin = 12  # GPIO pin connected to the servo
-servo = ServoController(servo_pin)
+servo = ServoController(pi, servo_pin)
 
-# Initialize PID controller
-pid = PID(0.8, 0.1, 0.05, setpoint=90)
-pid.output_limits = (70, 110)
+# Event to signal data availability
+data_available = Event()
+pot_value = 512  # Default to mid-range value (512)
+last_valid_pot_value = 512  # To store the last valid potentiometer value
 
-# Initialize moving average filter
-window_size = 5  # 移動平均フィルタのウィンドウサイズ
-moving_average = deque(maxlen=window_size)
-
-try:
+def read_radio_data():
+    global pot_value, last_valid_pot_value
     while True:
         if radio.available():
             rcvd = []
             radio.read(rcvd, radio.getDynamicPayloadSize())
-            print(f"Raw data received: {rcvd}")
-
             if len(rcvd) == 1:
-                pot_value = rcvd[0] * 4  # 値を元のスケールに戻す
+                received_value = rcvd[0] * 4  # 値を元のスケールに戻す
+                # Check if the received value is a sudden jump and either 0 or 1020
+                if abs(received_value - last_valid_pot_value) < 250 or (received_value != 0 and received_value != 1020):
+                    pot_value = received_value
+                    last_valid_pot_value = received_value
                 print(f"Received potentiometer value: {pot_value}")
+                data_available.set()  # Signal that data is available
 
-                # Add received value to the moving average filter
-                moving_average.append(pot_value)
+# Start the radio data reading thread
+radio_thread = Thread(target=read_radio_data, daemon=True)
+radio_thread.start()
 
-                # Calculate the average value
-                avg_value = sum(moving_average) / len(moving_average)
-                print(f"Average potentiometer value: {avg_value}")
+try:
+    while True:
+        if data_available.is_set():
+            data_available.clear()
 
-                # Map potentiometer value to servo angle (1023 -> 70°, 512 -> 90°, 0 -> 110°)
-                desired_angle = 110 - (avg_value / 1023.0) * (110 - 70)
+            # Map potentiometer value to desired angle (1023 -> 70°, 512 -> 95°, 0 -> 120°)
+            desired_angle = 120 - (pot_value / 1023.0) * (120 - 70)
+            print(f"Setting servo angle: {desired_angle}")
+            servo.set_angle(desired_angle)
 
-                # Use PID to calculate the new angle
-                angle = pid(desired_angle)
-                print(f"Setting servo angle: {angle}")
-                servo.set_angle(angle)
-
-        time.sleep(0.005)  # Reduced sleep time for more frequent checks
+        time.sleep(0.001)  # Small sleep time for more frequent checks
 except KeyboardInterrupt:
     servo.cleanup()
-    pigpio.pi().stop()
+    pi.stop()
+    GPIO.cleanup()
