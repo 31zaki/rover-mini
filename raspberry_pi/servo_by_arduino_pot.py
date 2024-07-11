@@ -1,7 +1,7 @@
 import sys
 sys.path.append('/home/zach/.local/lib/python3.12/site-packages')
 
-import RPi.GPIO as GPIO
+import pigpio
 import time
 import spidev
 from lib_nrf24 import NRF24
@@ -13,13 +13,7 @@ class ServoController:
         self.servo_pin = servo_pin
         self.frequency = frequency
 
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setwarnings(False)
-
-        # Setup servo pin
-        GPIO.setup(self.servo_pin, GPIO.OUT)
-        self.servo = GPIO.PWM(self.servo_pin, self.frequency)
-        self.servo.start(0)
+        self.pi = pigpio.pi()
 
         self.current_angle = 90  # 初期角度を90度に設定
         self.set_angle(self.current_angle)
@@ -32,21 +26,18 @@ class ServoController:
             angle = 110
 
         self.current_angle = angle
-        # Calculate duty cycle for the specified angle
-        duty = angle / 18 + 2
-        self.servo.ChangeDutyCycle(duty)
+        # Calculate pulse width for the specified angle
+        pulse_width = int((500 + (angle * 11.11)))  # Convert angle to pulse width in microseconds
+        self.pi.set_servo_pulsewidth(self.servo_pin, pulse_width)
         time.sleep(0.01)  # Allow time for the servo to move and stabilize
-        self.servo.ChangeDutyCycle(0)  # Stop sending signal to servo to prevent jitter
 
     def cleanup(self):
-        self.servo.stop()
-        GPIO.cleanup()
+        self.pi.set_servo_pulsewidth(self.servo_pin, 0)  # Stop sending pulses to the servo
+        self.pi.stop()
 
 # Initialize the radio
-GPIO.setmode(GPIO.BCM)
-
 pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1]]
-radio = NRF24(GPIO, spidev.SpiDev())
+radio = NRF24(pigpio.pi(), spidev.SpiDev())
 radio.begin(0, 19)
 radio.setPayloadSize(1)  # Payload size is now 1 byte
 radio.setChannel(0x77)
@@ -62,7 +53,7 @@ radio.printDetails()
 radio.startListening()
 
 # Initialize the servo controller
-servo_pin = 5  # GPIO pin connected to the servo
+servo_pin = 12  # GPIO pin connected to the servo
 servo = ServoController(servo_pin)
 
 # Initialize PID controller
@@ -102,4 +93,4 @@ try:
         time.sleep(0.005)  # Reduced sleep time for more frequent checks
 except KeyboardInterrupt:
     servo.cleanup()
-    GPIO.cleanup()
+    pigpio.pi().stop()
