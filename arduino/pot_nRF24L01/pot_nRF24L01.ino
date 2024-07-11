@@ -33,5 +33,5 @@ void loop() {
   Serial.print(" -> Transmitted value: ");
   Serial.println(potValue);
 
-  delay(5); // 0.005秒待つ
+  delay(1); // 0.001秒待つ
 }
