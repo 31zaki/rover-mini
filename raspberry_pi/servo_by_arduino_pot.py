@@ -33,7 +33,7 @@ GPIO.setwarnings(False)
 
 pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1]]
 radio = NRF24(GPIO, spidev.SpiDev())
-radio.begin(0, 19)
+radio.begin(0, 5)
 radio.setPayloadSize(1)  # Payload size is now 1 byte
 radio.setChannel(0x77)
 radio.setDataRate(NRF24.BR_1MBPS)
@@ -49,7 +49,7 @@ radio.startListening()
 
 # Initialize the servo controller
 pi = pigpio.pi()
-servo_pin = 12  # GPIO pin connected to the servo
+servo_pin = 13  # GPIO pin connected to the servo
 servo = ServoController(pi, servo_pin)
 
 # Event to signal data availability
