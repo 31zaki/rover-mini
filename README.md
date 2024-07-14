@@ -40,10 +40,10 @@ Custom EAGLE libraries have been created for the components used in this project
 ### Raspberry Pi 4 (40-pin header) Connections
 
 - **3.3V (Pin 1)** --------------- VCC (BNO055, nRF24L01)
-- **5V (Pin 2)** --------------- VCC (HC-SR04)
-- **GND (Pin 6)** --------------- GND (L298N, nRF24L01)
-- **GND (Pin 9)** --------------- GND (BNO055)
-- **GND (Pin 14)** -------------- GND (Servo Motors)
+- **5V (Pin 2)** ----------------- VCC (HC-SR04)
+- **GND (Pin 6)** ---------------- GND (L298N, nRF24L01)
+- **GND (Pin 9)** ---------------- GND (BNO055)
+- **GND (Pin 14)** --------------- GND (Servo Motors)
 - **GPIO 2 (Pin 3)** ------------- SDA (BNO055)
 - **GPIO 3 (Pin 5)** ------------- SCL (BNO055)
 - **GPIO 4 (Pin 7)** ------------- ECHO (HC-SR04) through voltage divider
@@ -54,12 +54,14 @@ Custom EAGLE libraries have been created for the components used in this project
 - **GPIO 25 (Pin 22)** ----------- ENB (L298N)
 - **GPIO 27 (Pin 13)** ----------- IN3 (L298N)
 - **GPIO 22 (Pin 15)** ----------- IN4 (L298N)
-- **GPIO 19 (Pin 35)** ----------- CE (nRF24L01)
+- **GPIO 5 (Pin 29)** ------------ CE (nRF24L01) // changed from 19
 - **GPIO 8 (Pin 24)** ------------ CSN (nRF24L01)
 - **GPIO 11 (Pin 23)** ----------- SCK (nRF24L01)
 - **GPIO 10 (Pin 19)** ----------- MOSI (nRF24L01)
 - **GPIO 9 (Pin 21)** ------------ MISO (nRF24L01)
-- **GPIO 12 (Pin 32)** ------------ Servo 1 Control
+- **GPIO 13 (Pin 32)** ----------- Servo 1 Control
+- **GPIO 12 (Pin 35)** ----------- Servo 2 Control
+- **GPIO 19 (Pin 37)** ----------- Servo 3 Control
 
 ## Goals
 
