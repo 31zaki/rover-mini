@@ -1096,8 +1096,8 @@ Source: http://eshop.phoenixcontact.com .. 1729131.pdf</description>
 <part name="GPS" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X4" device="" package3d_urn="urn:adsk.eagle:package:22407/2"/>
 <part name="NRF24L1" library="nRF24L01" deviceset="NRF24L01" device="" override_package3d_urn="urn:adsk.eagle:package:44679333/2" override_package_urn="urn:adsk.eagle:footprint:44679334/1"/>
 <part name="U$1" library="DHT20" deviceset="DHT20" device="" override_package3d_urn="urn:adsk.eagle:package:44679642/2" override_package_urn="urn:adsk.eagle:footprint:44679643/1"/>
-<part name="X1" library="con-phoenix-508" library_urn="urn:adsk.eagle:library:176" deviceset="MKDSN1,5/3-5,08" device="" package3d_urn="urn:adsk.eagle:package:9641/1"/>
-<part name="LXDC1" library="LXDC55" deviceset="LXDC55" device=""/>
+<part name="X1" library="con-phoenix-508" library_urn="urn:adsk.eagle:library:176" deviceset="MKDSN1,5/3-5,08" device="" package3d_urn="urn:adsk.eagle:package:9641/1" override_package3d_urn="urn:adsk.eagle:package:44838507/2" override_package_urn="urn:adsk.eagle:footprint:9549/1"/>
+<part name="LXDC1" library="LXDC55" deviceset="LXDC55" device="" override_package3d_urn="urn:adsk.eagle:package:44838509/2" override_package_urn="urn:adsk.eagle:footprint:44838510/1"/>
 </parts>
 <sheets>
 <sheet>
