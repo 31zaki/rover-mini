@@ -4,10 +4,10 @@ Welcome to rover-mini Repository!!
 <details>
 <summary><strong>NOTE for Reviewers and Users</strong></summary>
 
-While I have experience developing hardware as part of a [student-led Mars rover team](https://www.instagram.com/ares_project_official/),  
-my academic background is originally in Biomedical Engineering.  
-Fields like robotics, software development, and PCB design are still outside my core expertise.  
-This project is part of my personal learning journey, and I’m fully aware that there may — or probably should — be mistakes or imperfections.  
+While I have experience developing hardware as part of a [student-led Mars rover team](https://www.instagram.com/ares_project_official/),
+my academic background is originally in Biomedical Engineering.
+Fields like robotics, software development, and PCB design are still outside my core expertise.
+This project is part of my personal learning journey, and I’m fully aware that there may — or probably should — be mistakes or imperfections.
 Any feedback or advice would be warmly appreciated.
 
 Thank you!
@@ -21,7 +21,7 @@ Thank you!
   - More than size — like "山椒は小粒でもぴりりと辛い"
   - Designed with Japanese craftsmanship — tiny in size, vast in spirit.
 
- 
+
 ## Features
 **Manual Control**
   - Responsive remote operation using a PlayStation controller via Xbee and Bluetooth communication.
@@ -46,7 +46,7 @@ This mini rover is designed to be compact yet powerful, with a strong focus on f
 - Rocker mechanism designed with compact miter gears, providing superior maneuverability and articulation.
 - Simple and robust fabrication, combining 3D printed parts and laser-cut acrylic plates.
 - Two-layer acrylic structure to enhance overall strength and rigidity.
-- RealSense depth camera integrated for obstacle avoidance and spatial awareness, supporting advanced path planning. 
+- RealSense depth camera integrated for obstacle avoidance and spatial awareness, supporting advanced path planning.
 - Design with a skeleton-like aesthetic, exposing parts of the structure for a visually engaging appearance.
 - Soft rubber tyres for excellent traction and smooth handling across various surfaces.
 - Dual-computer architecture:
@@ -70,7 +70,7 @@ This mini rover is designed to be compact yet powerful, with a strong focus on f
 | **Category**         | **Component**                        | **Qty** | **Details**                                   |
 |----------------------|--------------------------------------|---------|-----------------------------------------------|
 | **Hardware**         | Main Computer                        | 1       | [Jetson Nano 4GB](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit)|
-|                      | Sub Computer                         | 1       | [Raspberry Pi Pico 2 W](https://akizukidenshi.com/catalog/g/g130330/)
+|                      | Sub Computer                         | 1       | [Raspberry Pi Pico 2 W](https://akizukidenshi.com/catalog/g/g130330/)|
 |                      | Battery                              | 2       | [7.2V 4000mAh Ni-MH for Tamiya RC](https://www.amazon.co.jp/-/en/dp/B07789SDYY/?coliid=I2JRBFQTBLRCJF&colid=2I8FL97HRD1KQ&psc=1&ref_=list_c_wl_lv_ov_lig_dp_it) |
 |                      | Drive Motor                          | 4       | [100:1 Metal Gearmotor 37Dx73L mm 12V with 64 CPR Encoder (Helical Pinion)](https://www.pololu.com/product/5167) |
 |                      | Motor Driver                         | 4       | [TB67H450FNG](https://akizukidenshi.com/catalog/g/g114967/) |
@@ -81,10 +81,15 @@ This mini rover is designed to be compact yet powerful, with a strong focus on f
 |                      | Communication Module                 | 2       |[Xbee](https://www.digi.com/resources/documentation/digidocs/pdfs/90002173.pdf) |
 |                      | GPS Module                           | 1       |[Gravity GPS](https://wiki.dfrobot.com/SKU_TEL0157_Gravity_GNSS_Positioning_Module) |
 |                      | Emergency Stop Button                | 1       |[KILIGEN 22mm 12-220V 5A](https://www.amazon.co.jp/dp/B0956SRHKC?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) |
+|                      | Miter gear for Rocker Mechanism      | 4       |[M1S25*2310](https://jp.misumi-ec.com/vona2/detail/221000021851/?ProductCode=M1S25*2310)|
+|                      | Bearings for Rocker Mechanism        | 6       |[SFL6700ZZ](https://jp.misumi-ec.com/vona2/detail/110302273720/?HissuCode=SFL6700ZZ&PNSearch=SFL6700ZZ&KWSearch=SFL6700ZZ&searchFlow=results2products&list=PageSearchResult)|
+|                      | Rocker Shaft Holder                  | 2       |[SSTHIC10M](https://jp.misumi-ec.com/vona2/detail/110300011320/?PNSearch=SSTHIC10M&HissuCode=SSTHIC10M&Keyword=SSTHIC10M&list=SuggestPreview&searchFlow=suggest2products)|
+|                      | Wheel Shaft Hub                      | 2       |[AO-8038](https://tamiyashop.jp/shop/g/g89877/)|
 | **Software**         | Operating System                     || Ubuntu 22.04                                  |
 |                      | Programming Framework                || ROS 2 Humble                                    |
 |                      | Control Algorithm                    || TBD                                           |
 |                      | Communication Protocol               || Wireless communication with the main rover (Xbee) |
+| **Electronics**      | Please refer to `/Electronics/BOM/`  |||
 
 ## Jetson Nano GPIO Configuration
 
