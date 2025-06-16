@@ -38,9 +38,10 @@ Thank you!
 
 ## Hardware Overview
 
-<img src="https://github.com/user-attachments/assets/b514a5a9-8c14-4c22-b700-6bbd3e406133" width="600"/>
-
 This mini rover is designed to be compact yet powerful, with a strong focus on functional performance, manufacturability, and aesthetic design.
+
+<img width="1200" alt="{AB2F8BDA-105C-4608-8CE0-41E401231829}" src="https://github.com/user-attachments/assets/14d9cbe3-57db-4417-957f-fef1953c7620" />
+
 ### Key Features:
 - High-torque 4WD system capable of navigating tough terrains.
 - Rocker mechanism designed with compact miter gears, providing superior maneuverability and articulation.
