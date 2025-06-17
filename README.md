@@ -1,5 +1,7 @@
-# Rover mini
+# rover mini
 Welcome to rover-mini Repository!!
+
+This is a self-initiated project designed to explore and learn the full spectrum of engineering from mechanical design and electronics to embedded systems and software development.
 
 <details>
 <summary><strong>NOTE for Reviewers and Users</strong></summary>
@@ -15,34 +17,34 @@ Thank you!
 </details>
 
 
-## Philosophy
-**Tiny, but Mighty**
+## philosophy
+**tiny, but mighty**
   - High performance in not enough; a heart must be woven into the design.
   - More than size — like "山椒は小粒でもぴりりと辛い"
   - Designed with Japanese craftsmanship — tiny in size, vast in spirit.
 
 
-## Features
-**Manual Control**
+## features
+**manual control**
   - Responsive remote operation using a PlayStation controller via Xbee and Bluetooth communication.
   - Essential for field testing and fine-tuning — offering an intuitive and playful driving experience.
 
-**Autonomous**
+**autonomous**
   - Core functionality designed for the University Rover Challenge Autonomous Mission.
   - Capable of navigating to specified GPS coordinates, detecting ARUCO markers, and identifying mission targets like bottles and hammers.
   - Striving toward true autonomy — small but strategic.
 
-**Collaboration with the Main Rover**
+**collaboration with the main rover**
   - Built for intelligent mission sharing: coordinate with the main rover to divide tasks and maximize mission points.
   - Share positional and target information to enhance team efficiency and achieve greater success together.
 
-## Hardware Overview
+## hardware overview
 
 This mini rover is designed to be compact yet powerful, with a strong focus on functional performance, manufacturability, and aesthetic design.
 
 <img width="1200" alt="{AB2F8BDA-105C-4608-8CE0-41E401231829}" src="https://github.com/user-attachments/assets/14d9cbe3-57db-4417-957f-fef1953c7620" />
 
-### Key Features:
+### key features:
 - High-torque 4WD system capable of navigating tough terrains.
 - Rocker mechanism designed with compact miter gears, providing superior maneuverability and articulation.
 - Simple and robust fabrication, combining 3D printed parts and laser-cut acrylic plates.
@@ -54,7 +56,7 @@ This mini rover is designed to be compact yet powerful, with a strong focus on f
   - Jetson Nano handles computationally intensive tasks like vision processing.
   - Raspberry Pi Pico 2W manages low-level motion control.
 
-### Specifications:
+### specifications:
 - Dimensions: 330 mm (W) × 370 mm (L) × 400 mm (H)
 - Weight: 5 kg
 - Maximum Speed: 10 m/s
@@ -62,15 +64,15 @@ This mini rover is designed to be compact yet powerful, with a strong focus on f
 - 4-wheel drive system with custom 3D printed inner wheels and rubber tyres
 
 
-## Directory Structure (今のところ)
+## directory structure (今のところ)
 ```
 ```
 
-## System Components
+## system components
 
-| **Category**         | **Component**                        | **Qty** | **Details**                                   |
+| **category**         | **component**                        | **qty** | **details**                                   |
 |----------------------|--------------------------------------|---------|-----------------------------------------------|
-| **Hardware**         | Main Computer                        | 1       | [Jetson Nano 4GB](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit)|
+| **hardware**         | Main Computer                        | 1       | [Jetson Nano 4GB](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit)|
 |                      | Sub Computer                         | 1       | [Raspberry Pi Pico 2 W](https://akizukidenshi.com/catalog/g/g130330/)|
 |                      | Battery                              | 2       | [7.2V 4000mAh Ni-MH for Tamiya RC](https://www.amazon.co.jp/-/en/dp/B07789SDYY/?coliid=I2JRBFQTBLRCJF&colid=2I8FL97HRD1KQ&psc=1&ref_=list_c_wl_lv_ov_lig_dp_it) |
 |                      | Drive Motor                          | 4       | [100:1 Metal Gearmotor 37Dx73L mm 12V with 64 CPR Encoder (Helical Pinion)](https://www.pololu.com/product/5167) |
@@ -86,15 +88,15 @@ This mini rover is designed to be compact yet powerful, with a strong focus on f
 |                      | Bearings for Rocker Mechanism        | 6       |[SFL6700ZZ](https://jp.misumi-ec.com/vona2/detail/110302273720/?HissuCode=SFL6700ZZ&PNSearch=SFL6700ZZ&KWSearch=SFL6700ZZ&searchFlow=results2products&list=PageSearchResult)|
 |                      | Rocker Shaft Holder                  | 2       |[SSTHIC10M](https://jp.misumi-ec.com/vona2/detail/110300011320/?PNSearch=SSTHIC10M&HissuCode=SSTHIC10M&Keyword=SSTHIC10M&list=SuggestPreview&searchFlow=suggest2products)|
 |                      | Wheel Shaft Hub                      | 2       |[AO-8038](https://tamiyashop.jp/shop/g/g89877/)|
-| **Software**         | Operating System                     || Ubuntu 22.04                                  |
+| **software**         | Operating System                     || Ubuntu 22.04                                  |
 |                      | Programming Framework                || ROS 2 Humble                                    |
 |                      | Control Algorithm                    || TBD                                           |
 |                      | Communication Protocol               || Wireless communication with the main rover (Xbee) |
-| **Electronics**      | Please refer to `/Electronics/BOM/`  |||
+| **electronics**      | Please refer to `/Electronics/BOM/`  |||
 
-## Jetson Nano GPIO Configuration
+## Jetson Nano GPIO configuration
 
-| **GPIO Pin Number**  | **Device Name**                | **Connection (Pin or Function)**  | **Purpose**                     |
+| **GPIO pin number**  | **device name**                | **connection (pin or function)**  | **purpose**                     |
 |---------------------:|--------------------------------|-----------------------------------|---------------------------------|
 | 3 (I2C SDA)          | I2C Bus                        | SDA                               | I2C Data for GPS/BNO055         |
 | 5 (I2C SCL)          | I2C Bus                        | SCL                               | I2C Clock for GPS/BNO055        |
@@ -105,8 +107,8 @@ This mini rover is designed to be compact yet powerful, with a strong focus on f
 | 10 (UART RX)         | Pico TX                        | JETSON_RX-PICO_TX                 | UART Communication              |
 
 
-## Raspberry Pi pico GPIO Configration
-| **GPIO Pin Number** | **Device Name**                 | **Connection (Pin or Function)**  | **Purpose**                     |
+## Raspberry Pi pico GPIO configration
+| **GPIO pin number** | **device name**                 | **connection (pin or function)**  | **purpose**                     |
 |---------------------:|--------------------------------|-----------------------------------|---------------------------------|
 | GP0                  | Jetson Nano UART               | JETSON_RX-PICO_TX                 | UART Communication              |
 | GP1                  | Jetson Nano UART               | JETSON_TX-PICO_RX                 | UART Communication              |
@@ -132,10 +134,10 @@ RF: Right Front<br>
 LR: Left Rear<br>
 RR: Right Rear<br>
 
-## Install Required Python Libraries
+## install required python libraries
 
 
-## Miscellaneous
+## miscellaneous
 
-### Project Name
+### project name
 The project name "rover-mini" is inspired by the iconic British car [Mini](https://en.wikipedia.org/wiki/Mini). Like its namesake, this rover aims to be compact, functional, and adorable.
