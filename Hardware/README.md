@@ -3,7 +3,7 @@
 This directory contains the mechanical design files for the rover-mini project.
 It includes 3D models, structural notes, and mechanical features essential for the rover's operation.
 
-<img src="https://github.com/user-attachments/assets/b514a5a9-8c14-4c22-b700-6bbd3e406133" width="600"/>
+<img src="https://github.com/user-attachments/assets/3a4e0ee4-c4f7-4537-bd1b-e2ff34cf6d44" width="800"/>
 
 ## Overview
 
