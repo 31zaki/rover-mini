@@ -63,15 +63,20 @@ class ControllerReader:
                 return None
 
         # ── Axes ──────────────────────────────────────────────────────────
-        raw_v = -self._joy.get_axis(1)          # left  stick Y (inverted)
-        raw_w =  self._joy.get_axis(2)          # right stick X
+        # R2/L2: axis value is -1.0 (not pressed) ~ +1.0 (fully pressed)
+        # normalize to 0.0 ~ 1.0
+        r2 = (self._joy.get_axis(5) + 1.0) / 2.0   # R2 → forward
+        l2 = (self._joy.get_axis(4) + 1.0) / 2.0   # L2 → backward
+        raw_v = r2 - l2                              # -1.0 ~ +1.0
 
-        v = _apply_deadzone(raw_v)
+        raw_w = self._joy.get_axis(0)               # left stick X
+
+        v = raw_v  # triggers don't need deadzone (start from 0)
         w = _apply_deadzone(raw_w)
 
         # ── Speed scale ───────────────────────────────────────────────────
-        l1 = bool(self._joy.get_button(4))
-        r1 = bool(self._joy.get_button(5))
+        l1 = bool(self._joy.get_button(9))
+        r1 = bool(self._joy.get_button(10))
 
         if l1:
             scale = SLOW_MULTIPLIER
@@ -106,7 +111,7 @@ class ControllerReader:
             flags |= ButtonFlag.FAST_MODE
 
         # OPTIONS: emergency stop
-        if self._joy.get_button(9):
+        if self._joy.get_button(6):
             flags |= ButtonFlag.EMERGENCY_STOP
 
         return RoverCommand(v=v, w=w, buttons=flags)
