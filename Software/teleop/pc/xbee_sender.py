@@ -18,7 +18,7 @@ def list_ports() -> list[str]:
 class XBeeSender:
     """Opens a serial port connected to an XBee module and sends packets."""
 
-    def __init__(self, port: str, baudrate: int = 115200, timeout: float = 1.0):
+    def __init__(self, port: str, baudrate: int = 9600, timeout: float = 1.0):
         """
         Args:
             port     : Serial port (e.g. 'COM3' on Windows, '/dev/ttyUSB0' on Linux/Mac)

@@ -22,7 +22,7 @@ from packet      import ButtonFlag
 
 # ── Defaults ─────────────────────────────────────────────────────────────────
 DEFAULT_PORT     = "/dev/ttyUSB0"   # change to COMx on Windows
-DEFAULT_BAUDRATE = 115200
+DEFAULT_BAUDRATE = 9600
 SEND_RATE_HZ     = 20               # packets per second
 # ─────────────────────────────────────────────────────────────────────────────
 
